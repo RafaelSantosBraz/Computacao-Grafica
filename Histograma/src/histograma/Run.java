@@ -22,10 +22,10 @@ public class Run {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            Histograma histRed = new Histograma();
-            Histograma histGreen = new Histograma();
-            Histograma histBlue = new Histograma();
-            File f = new File("C:\\Users\\a120121\\Desktop\\Computacao-Grafica\\Histograma\\teste.jpg");
+            Histograma histRed = new Histograma("Vermelho");
+            Histograma histGreen = new Histograma("Verde");
+            Histograma histBlue = new Histograma("Azul");
+            File f = new File("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Histograma/teste.jpg");
             BufferedImage img = ImageIO.read(f);
             for (int x = 0; x < img.getWidth(); x++) {
                 for (int z = 0; z < img.getHeight(); z++) {
@@ -38,9 +38,10 @@ public class Run {
                     histBlue.setValor(b);
                 }
             }
-            histRed.exibirValores();
-            histGreen.exibirValores();
-            histBlue.exibirValores();
+            //            histRed.exibirValores();
+            //            histGreen.exibirValores();
+            //            histBlue.exibirValores();
+            //            histRed.exibirValoresCrescente();
         } catch (Exception e) {
         }
     }
