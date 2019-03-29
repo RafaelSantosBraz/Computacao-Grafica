@@ -53,7 +53,7 @@ public class Histograma {
             System.out.println("Valor " + t.getChave() + " Quant " + t.getValor());
         });
     }
-    
+
     public void exibirValoresCrescente() {
         ArrayList<ChaveValor> lista = getValoresCrescentes();
         System.out.println("Nome: " + nome);
@@ -109,4 +109,9 @@ public class Histograma {
         });
         return lista;
     }
+
+    public HashMap<Integer, Integer> getValores() {
+        return histograma;
+    }
+
 }

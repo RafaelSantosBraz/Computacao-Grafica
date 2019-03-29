@@ -42,6 +42,12 @@ public class Run {
             //            histGreen.exibirValores();
             //            histBlue.exibirValores();
             //            histRed.exibirValoresCrescente();
+            Grafico graph = new Grafico(histRed);
+            graph.criarGrafico();
+            Grafico graph2 = new Grafico(histGreen);
+            graph2.criarGrafico();
+            Grafico graph3 = new Grafico(histBlue);
+            graph3.criarGrafico();
         } catch (Exception e) {
         }
     }
