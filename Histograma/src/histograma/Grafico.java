@@ -42,6 +42,9 @@ public class Grafico extends JFrame {
     }
 
     private void adicionarValores(DefaultCategoryDataset barra) {
+        for (Integer c = 0; c < 256; c++) {
+            barra.setValue(0, c, "");
+        }
         histograma.getValores().forEach((t, u) -> {
             barra.setValue(u, t, "");
         });
