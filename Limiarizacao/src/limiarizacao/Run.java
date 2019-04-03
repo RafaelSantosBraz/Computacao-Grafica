@@ -41,13 +41,17 @@ public class Run {
                 }
             }
             Grafico graph = new Grafico(histRed);
-            //graph.criarGrafico();
             Grafico graph2 = new Grafico(histGreen);
-            //graph2.criarGrafico();
             Grafico graph3 = new Grafico(histBlue);
-            graph3.criarGrafico();
-            int t = new Otsu(histBlue).calcularOtsu();
+            int t = new Otsu(histRed).calcularOtsu();
             System.out.println("T = " + t);
+            graph.criarGraficoLimiar(t);
+            t = new Otsu(histGreen).calcularOtsu();
+            System.out.println("T = " + t);
+            graph2.criarGraficoLimiar(t);
+            t = new Otsu(histBlue).calcularOtsu();
+            System.out.println("T = " + t);
+            graph3.criarGraficoLimiar(t);
         } catch (Exception e) {
             System.out.println("Erro: " + e.toString());
         }

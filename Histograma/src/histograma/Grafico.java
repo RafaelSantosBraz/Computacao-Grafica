@@ -16,32 +16,44 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
- * @author rafael
+ * @author Rafael Braz
  */
 public class Grafico extends JFrame {
-
+    
     private final Histograma histograma;
-
+    private final DefaultCategoryDataset barra;
+    private JFreeChart grafico;
+    
     public Grafico(Histograma histograma) {
         this.histograma = histograma;
+        barra = new DefaultCategoryDataset();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Histograma");
         setSize(950, 700);
         setLocationRelativeTo(null);
         setVisible(false);
     }
-
+    
     public void criarGrafico() {
-        DefaultCategoryDataset barra = new DefaultCategoryDataset();
-        adicionarValores(barra);
-        JFreeChart grafico = ChartFactory.createBarChart3D(histograma.getNome(), "Valor 'RGB'", "Quantidade", barra, PlotOrientation.VERTICAL, false, true, false);
-        tornarPreto(grafico);
+        adicionarValores();
+        grafico = ChartFactory.createBarChart3D(histograma.getNome(), "Valor 'RGB'", "Quantidade", barra, PlotOrientation.VERTICAL, false, true, false);
+        tornarPreto();
         ChartPanel painel = new ChartPanel(grafico);
         add(painel);
         setVisible(true);
     }
-
-    private void adicionarValores(DefaultCategoryDataset barra) {
+    
+    public void criarGraficoLimiar(Integer limiar) {
+        adicionarValores();
+        grafico = ChartFactory.createBarChart3D(histograma.getNome(), "Valor 'RGB'", "Quantidade", barra, PlotOrientation.VERTICAL, false, true, false);
+        tornarPreto();
+        destacarLimiar(limiar);
+        ChartPanel painel = new ChartPanel(grafico);
+        add(painel);
+        setVisible(true);
+    }
+    
+    private void adicionarValores() {
         for (Integer c = 0; c < 256; c++) {
             barra.setValue(0, c, "");
         }
@@ -49,12 +61,17 @@ public class Grafico extends JFrame {
             barra.setValue(u, t, "");
         });
     }
-
-    private void tornarPreto(JFreeChart grafico) {
+    
+    private void tornarPreto() {
         int quant = grafico.getCategoryPlot().getDataset().getRowCount();
         CategoryPlot barraItem = grafico.getCategoryPlot();
         for (int c = 0; c < quant; c++) {
             barraItem.getRenderer().setSeriesPaint(c, Color.BLACK);
         }
+    }
+    
+    public void destacarLimiar(Integer limiar) {
+        CategoryPlot barraItem = grafico.getCategoryPlot();
+        barraItem.getRenderer().setSeriesPaint(limiar, Color.PINK);
     }
 }
