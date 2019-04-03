@@ -40,12 +40,12 @@ public class Run {
                     histBlue.setValor(b);
                 }
             }
-//            Grafico graph = new Grafico(histRed);
-//            graph.criarGrafico();
-//            Grafico graph2 = new Grafico(histGreen);
-//            graph2.criarGrafico();
-//            Grafico graph3 = new Grafico(histBlue);
-//            graph3.criarGrafico();
+            Grafico graph = new Grafico(histRed);
+            //graph.criarGrafico();
+            Grafico graph2 = new Grafico(histGreen);
+            //graph2.criarGrafico();
+            Grafico graph3 = new Grafico(histBlue);
+            graph3.criarGrafico();
             int t = new Otsu(histBlue).calcularOtsu();
             System.out.println("T = " + t);
         } catch (Exception e) {

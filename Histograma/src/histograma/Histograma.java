@@ -28,7 +28,8 @@ public class Histograma {
     }
 
     public Integer getValor(Integer pos) {
-        return histograma.get(pos);
+        Integer valor = histograma.get(pos);
+        return valor != null ? valor : 0;
     }
 
     public void setValor(Integer pos) {

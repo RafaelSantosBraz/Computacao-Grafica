@@ -9,7 +9,7 @@ import histograma.Histograma;
 
 /**
  *
- * @author rafael
+ * @author Rafael Braz
  */
 public class Otsu {
 
@@ -21,7 +21,7 @@ public class Otsu {
 
     public int calcularOtsu() {
         double max = 0;
-        //int maxt = 0;
+        int maxt = 0;
         for (int t = 0; t < 256; t++) {
             int w0 = 0, ut = 0, uT = 0;
             for (int i = 0; i <= t; i++) {
@@ -42,10 +42,10 @@ public class Otsu {
             double n = (a2B / a2T);
             if (n > max) {
                 max = n;
-                //maxt = t;
+                maxt = t;
             }
         }
-        return (int) max;
+        return maxt;
     }
 
 }
