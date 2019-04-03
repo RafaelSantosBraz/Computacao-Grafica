@@ -44,13 +44,8 @@ public class Grafico extends JFrame {
     }
     
     public void criarGraficoLimiar(Integer limiar) {
-        adicionarValores();
-        grafico = ChartFactory.createBarChart3D(histograma.getNome(), "Valor 'RGB'", "Quantidade", barra, PlotOrientation.VERTICAL, false, true, false);
-        tornarPreto();
+        criarGrafico();
         destacarLimiar(limiar);
-        ChartPanel painel = new ChartPanel(grafico);
-        add(painel);
-        setVisible(true);
     }
     
     private void adicionarValores() {
