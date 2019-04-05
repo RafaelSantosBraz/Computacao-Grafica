@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  */
 public class Imagem {
 
-    private final HashMap<Coordenada, RGB> quadro;
+    private final HashMap<String, RGB> quadro;
     private final File f;
     private final BufferedImage img;
     private final int largura;
@@ -36,11 +36,13 @@ public class Imagem {
     }
 
     private void adicionar(Coordenada coordenada, RGB rgb) {
-        quadro.put(coordenada, rgb);
+        String coord = coordenada.getX() + ";" + coordenada.getY();
+        quadro.put(coord, rgb);
     }
 
     public RGB getRGB(Coordenada coordenada) {
-        return quadro.get(coordenada);
+        String coord = coordenada.getX() + ";" + coordenada.getY();
+        return quadro.get(coord);
     }
 
     public int getLargura() {

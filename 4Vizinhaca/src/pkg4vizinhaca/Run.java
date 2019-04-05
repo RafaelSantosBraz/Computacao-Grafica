@@ -5,15 +5,9 @@
  */
 package pkg4vizinhaca;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-import javax.imageio.ImageIO;
-
 /**
  *
- * @author Rafael
+ * @author Rafael Braz
  */
 public class Run {
 
@@ -22,12 +16,13 @@ public class Run {
      */
     public static void main(String[] args) {
         try {
-            Imagem img = new Imagem("C:\\Users\\aluno\\Desktop\\Computacao-Grafica\\4Vizinhaca\\teste.jpg");
+            Imagem img = new Imagem("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\teste.jpg");
             Vizinhanca4 vizinhanca = new Vizinhanca4(img);
-            vizinhanca.gerarImagemSaida("C:\\Users\\aluno\\Desktop\\Computacao-Grafica\\4Vizinhaca\\out.jpg");
+            vizinhanca.calcular4VizinhancaHorVert();
+            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\out.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());
         }
     }
-    
+
 }
