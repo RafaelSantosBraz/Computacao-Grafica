@@ -6,6 +6,11 @@
 package limiarizacao;
 
 import histograma.Histograma;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -48,4 +53,20 @@ public class Otsu {
         return maxt;
     }
 
+    public void gerarImagemSaida(String caminho, BufferedImage imgSrc, int T) throws IOException {
+        BufferedImage saida = new BufferedImage(imgSrc.getWidth(), imgSrc.getHeight(), imgSrc.getType());
+        for (int x = 0; x < imgSrc.getWidth(); x++) {
+            for (int z = 0; z < imgSrc.getHeight(); z++) {
+                Color c = new Color(imgSrc.getRGB(x, z));
+                int r = c.getRed();
+                if (r <= T) {
+                    saida.setRGB(x, z, new Color(0, 0, 0).getRGB());
+                } else {
+                    saida.setRGB(x, z, new Color(255, 255, 255).getRGB());
+                }
+            }
+        }
+        File out = new File(caminho);
+        ImageIO.write(saida, "JPG", out);
+    }
 }
