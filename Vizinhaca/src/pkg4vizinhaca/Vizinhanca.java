@@ -17,12 +17,12 @@ import javax.imageio.ImageIO;
  *
  * @author Rafael Braz
  */
-public class Vizinhanca4 {
+public class Vizinhanca {
 
     private final Imagem imgSrc;
     private HashMap<Coordenada, RGB> imgOut;
 
-    public Vizinhanca4(Imagem imgSrc) {
+    public Vizinhanca(Imagem imgSrc) {
         this.imgSrc = imgSrc;
     }
 

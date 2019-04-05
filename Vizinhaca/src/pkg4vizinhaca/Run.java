@@ -16,12 +16,12 @@ public class Run {
      */
     public static void main(String[] args) {
         try {
-            Imagem img = new Imagem("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\teste.jpg");
-            Vizinhanca4 vizinhanca = new Vizinhanca4(img);
+            Imagem img = new Imagem("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\teste.jpg");
+            Vizinhanca vizinhanca = new Vizinhanca(img);
             vizinhanca.calcular4VizinhancaHorVert();
-            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\out.jpg");
+            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\out.jpg");
             vizinhanca.calcular4VizinhancaDiagonal();
-            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\out1.jpg");
+            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\out1.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());
         }
