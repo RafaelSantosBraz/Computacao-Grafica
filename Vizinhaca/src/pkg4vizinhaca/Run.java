@@ -22,6 +22,8 @@ public class Run {
             vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\out.jpg");
             vizinhanca.calcular4VizinhancaDiagonal();
             vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\out1.jpg");
+            vizinhanca.calcular8Vizinhanca();
+            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\Vizinhaca\\out2.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());
         }

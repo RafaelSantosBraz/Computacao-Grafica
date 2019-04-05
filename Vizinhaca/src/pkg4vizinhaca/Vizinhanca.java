@@ -34,6 +34,19 @@ public class Vizinhanca {
         calcular4Vizinhanca(true);
     }
 
+    public void calcular8Vizinhanca() {
+        imgOut = new HashMap<>();
+        for (int x = 0; x < imgSrc.getLargura(); x++) {
+            for (int y = 0; y < imgSrc.getAltura(); y++) {
+                Coordenada xy = new Coordenada(x, y);
+                ArrayList<RGB> vizinhos = getListaPixels(xy);
+                vizinhos.addAll(getListaPixelsDiagonal(xy));
+                RGB novo = calcularMediapixels(vizinhos);
+                imgOut.put(xy, novo);
+            }
+        }
+    }
+
     private void calcular4Vizinhanca(boolean diagonal) {
         imgOut = new HashMap<>();
         for (int x = 0; x < imgSrc.getLargura(); x++) {
