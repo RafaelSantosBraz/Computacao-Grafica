@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author aluno
+ * @author Rafael Braz
  */
 public class Vizinhanca4 {
 
@@ -27,11 +27,24 @@ public class Vizinhanca4 {
     }
 
     public void calcular4VizinhancaHorVert() {
+        calcular4Vizinhanca(false);
+    }
+
+    public void calcular4VizinhancaDiagonal() {
+        calcular4Vizinhanca(true);
+    }
+
+    private void calcular4Vizinhanca(boolean diagonal) {
         imgOut = new HashMap<>();
         for (int x = 0; x < imgSrc.getLargura(); x++) {
             for (int y = 0; y < imgSrc.getAltura(); y++) {
                 Coordenada xy = new Coordenada(x, y);
-                ArrayList<RGB> vizinhos = getListaPixels(xy);
+                ArrayList<RGB> vizinhos;
+                if (diagonal) {
+                    vizinhos = getListaPixelsDiagonal(xy);
+                } else {
+                    vizinhos = getListaPixels(xy);
+                }
                 RGB novo = calcularMediapixels(vizinhos);
                 imgOut.put(xy, novo);
             }
@@ -54,43 +67,44 @@ public class Vizinhanca4 {
     }
 
     private ArrayList<RGB> getListaPixels(Coordenada xy) {
+        ArrayList<RGB> vizinhos = new ArrayList<>();
+        vizinhos.add(compensarRGB(xy));
+        ArrayList<Coordenada> coords = new ArrayList<>();
+        coords.add(new Coordenada(xy.getX() - 1, xy.getY()));
+        coords.add(new Coordenada(xy.getX() + 1, xy.getY()));
+        coords.add(new Coordenada(xy.getX(), xy.getY() + 1));
+        coords.add(new Coordenada(xy.getX(), xy.getY() - 1));
+        vizinhos.addAll(getListaBase(coords));
+        return vizinhos;
+    }
+
+    private ArrayList<RGB> getListaPixelsDiagonal(Coordenada xy) {
+        ArrayList<RGB> vizinhos = new ArrayList<>();
+        vizinhos.add(compensarRGB(xy));
+        ArrayList<Coordenada> coords = new ArrayList<>();
+        coords.add(new Coordenada(xy.getX() - 1, xy.getY() - 1));
+        coords.add(new Coordenada(xy.getX() + 1, xy.getY() - 1));
+        coords.add(new Coordenada(xy.getX() - 1, xy.getY() + 1));
+        coords.add(new Coordenada(xy.getX() + 1, xy.getY() + 1));
+        vizinhos.addAll(getListaBase(coords));
+        return vizinhos;
+    }
+
+    private RGB compensarRGB(Coordenada xy) {
         RGB novo = new RGB(0, 0, 0);
         RGB p = imgSrc.getRGB(xy);
         novo.incrementarRGB(p);
+        return novo;
+    }
+
+    private ArrayList<RGB> getListaBase(ArrayList<Coordenada> coords) {
         ArrayList<RGB> vizinhos = new ArrayList<>();
-        vizinhos.add(novo);
-        for (int i = 0; i < 4; i++) {
-            switch (i) {
-                case 0: {
-                    Coordenada novoxy = new Coordenada(xy.getX() - 1, xy.getY());
-                    RGB pxy = imgSrc.getRGB(novoxy);
-                    if (pxy != null) {
-                        vizinhos.add(pxy);
-                    }
-                }
-                case 1: {
-                    Coordenada novoxy = new Coordenada(xy.getX() + 1, xy.getY());
-                    RGB pxy = imgSrc.getRGB(novoxy);
-                    if (pxy != null) {
-                        vizinhos.add(pxy);
-                    }
-                }
-                case 2: {
-                    Coordenada novoxy = new Coordenada(xy.getX(), xy.getY() + 1);
-                    RGB pxy = imgSrc.getRGB(novoxy);
-                    if (pxy != null) {
-                        vizinhos.add(pxy);
-                    }
-                }
-                case 3: {
-                    Coordenada novoxy = new Coordenada(xy.getX(), xy.getY() - 1);
-                    RGB pxy = imgSrc.getRGB(novoxy);
-                    if (pxy != null) {
-                        vizinhos.add(pxy);
-                    }
-                }
+        coords.forEach((t) -> {
+            RGB pxy = imgSrc.getRGB(t);
+            if (pxy != null) {
+                vizinhos.add(pxy);
             }
-        }
+        });
         return vizinhos;
     }
 

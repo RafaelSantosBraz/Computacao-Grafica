@@ -20,6 +20,8 @@ public class Run {
             Vizinhanca4 vizinhanca = new Vizinhanca4(img);
             vizinhanca.calcular4VizinhancaHorVert();
             vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\out.jpg");
+            vizinhanca.calcular4VizinhancaDiagonal();
+            vizinhanca.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\4Vizinhaca\\out1.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());
         }
