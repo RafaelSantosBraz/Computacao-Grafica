@@ -5,8 +5,13 @@
  */
 package convolucao;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
 import pkg4vizinhaca.Coordenada;
 import pkg4vizinhaca.Imagem;
 import pkg4vizinhaca.RGB;
@@ -19,9 +24,9 @@ public class Convolucao {
 
     private final Imagem imgSrc;
     private HashMap<Coordenada, RGB> imgOut;
-    private final double[][] mascara;
+    private final Mascara mascara;
 
-    public Convolucao(Imagem imgSrc, double[][] mascara) {
+    public Convolucao(Imagem imgSrc, Mascara mascara) {
         this.imgSrc = imgSrc;
         this.mascara = mascara;
     }
@@ -31,22 +36,67 @@ public class Convolucao {
         for (int x = 0; x < imgSrc.getLargura(); x++) {
             for (int y = 0; y < imgSrc.getAltura(); y++) {
                 Coordenada xy = new Coordenada(x, y);
-                ArrayList<RGB> vizinhos = getListaPixels(xy);
-                //vizinhos.addAll(getListaPixelsDiagonal(xy));
-                //RGB novo = calcularMediapixels(vizinhos);
-                //imgOut.put(xy, novo);
+                ArrayList<CoordenadaPeso> coordPeso = mascara.getCoordenadasRelativas(xy);
+                ArrayList<RGB> vizinhos = getListaPixels(coordPeso);
+                RGB novo = calcularMediapixels(vizinhos, coordPeso);
+                imgOut.put(xy, novo);
             }
         }
     }
 
-    private ArrayList<RGB> getListaPixels(Coordenada xy) {
+    private ArrayList<RGB> getListaPixels(ArrayList<CoordenadaPeso> coords) {
         ArrayList<RGB> vizinhos = new ArrayList<>();
-        ArrayList<Coordenada> coords = new ArrayList<>();
-        coords.add(new Coordenada(xy.getX() - 1, xy.getY()));
-        coords.add(new Coordenada(xy.getX() + 1, xy.getY()));
-        coords.add(new Coordenada(xy.getX(), xy.getY() + 1));
-        coords.add(new Coordenada(xy.getX(), xy.getY() - 1));
         vizinhos.addAll(getListaBase(coords));
         return vizinhos;
+    }
+
+    private ArrayList<RGB> getListaBase(ArrayList<CoordenadaPeso> coords) {
+        ArrayList<RGB> vizinhos = new ArrayList<>();
+        coords.forEach((t) -> {
+            RGB pxy = imgSrc.getRGB(t);
+            if (pxy != null) {
+                double peso = t.getPeso();
+                pxy.setR((int) (pxy.getR() * peso));
+                pxy.setG((int) (pxy.getG() * peso));
+                pxy.setB((int) (pxy.getB() * peso));
+                vizinhos.add(pxy);
+            }
+        });
+        return vizinhos;
+    }
+
+    private double somarPesos(ArrayList<CoordenadaPeso> coords) {
+        double peso = 0.0;
+        for (CoordenadaPeso cp : coords) {
+            if (imgSrc.getRGB(cp) != null) {
+                peso += cp.getPeso();
+            }
+        }
+        return peso;
+    }
+
+    private RGB calcularMediapixels(ArrayList<RGB> vizinhos, ArrayList<CoordenadaPeso> coords) {
+        RGB novo = new RGB(0, 0, 0);
+        vizinhos.forEach((t) -> {
+            novo.incrementarRGB(t);
+        });
+        calcularMediaRGB(novo, somarPesos(coords));
+        return novo;
+    }
+
+    private void calcularMediaRGB(RGB p, double quant) {
+        p.setR((int) (p.getR() / quant));
+        p.setG((int) (p.getG() / quant));
+        p.setB((int) (p.getB() / quant));
+        p.normalizarRGB();
+    }
+
+    public void gerarImagemSaida(String caminho) throws IOException {
+        BufferedImage saida = new BufferedImage(imgSrc.getLargura(), imgSrc.getAltura(), imgSrc.getTipo());
+        imgOut.forEach((t, u) -> {
+            saida.setRGB(t.getX(), t.getY(), new Color(u.getR(), u.getG(), u.getB()).getRGB());
+        });
+        File out = new File(caminho);
+        ImageIO.write(saida, "JPG", out);
     }
 }
