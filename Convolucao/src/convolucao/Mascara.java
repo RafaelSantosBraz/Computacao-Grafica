@@ -20,6 +20,19 @@ public class Mascara {
         this.masc = masc;
     }
 
+    public Mascara(double[][] masc, double fracao) {
+        this.masc = masc;
+        aplicarFracao(fracao);
+    }
+
+    private void aplicarFracao(double fracao) {
+        for (int c = 0; c < masc.length; c++) {
+            for (int i = 0; i < masc[c].length; i++) {
+                masc[c][i] *= fracao;
+            }
+        }
+    }
+
     public boolean verificarMascara() {
         int count = masc.length;
         for (double[] masc1 : masc) {

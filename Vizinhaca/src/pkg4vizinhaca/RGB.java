@@ -64,20 +64,23 @@ public class RGB {
     }
 
     public void normalizarRGB() {
+        R = (R - 226) / 29;
+        G = (G - 226) / 29;
+        B = (B - 226) / 29;
         if (R > 255) {
             R = 255;
         } else if (R < 0) {
-            R = 0;
+            R = 226;
         }
         if (G > 255) {
             G = 255;
         } else if (G < 0) {
-            G = 0;
+            G = 226;
         }
         if (B > 255) {
             B = 255;
         } else if (B < 0) {
-            B = 0;
+            B = 226;
         }
     }
 }

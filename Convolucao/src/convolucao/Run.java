@@ -19,17 +19,18 @@ public class Run {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
+            Imagem img = new Imagem("/home/aluno/Área de Trabalho/Computacao-Grafica/Convolucao/teste.jpg");
+            double fracao = 1.0 / 1;
             double[][] mascara = {
-                {1, 1, 1},
-                {1, 9, 1}, 
-                {1, 1, 1}
+                {1,1,1},
+                {1,1,1},
+                {1,1,1}
             };
-            Mascara masc = new Mascara(mascara);
+            Mascara masc = new Mascara(mascara, fracao);
             if (masc.verificarMascara()) {
                 Convolucao conv = new Convolucao(img, masc);
                 conv.aplicarConvolucao();
-                conv.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/out.jpg");
+                conv.gerarImagemSaida("/home/aluno/Área de Trabalho/Computacao-Grafica/Convolucao/o ut3.jpg");
             } else {
                 System.out.println("Máscara Inválida!");
             }

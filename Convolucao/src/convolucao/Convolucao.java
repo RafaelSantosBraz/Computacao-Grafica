@@ -81,6 +81,7 @@ public class Convolucao {
             novo.incrementarRGB(t);
         });
         calcularMediaRGB(novo, somarPesos(coords));
+        //novo.normalizarRGB();
         return novo;
     }
 
