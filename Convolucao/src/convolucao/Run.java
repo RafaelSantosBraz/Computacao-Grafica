@@ -21,22 +21,14 @@ public class Run {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            HistogramaRGB histograma = new HistogramaRGB();
-            histograma.preencherHistograma("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
-            Grafico r = new Grafico(histograma.getRed());
-            r.criarGrafico();
-            Grafico g = new Grafico(histograma.getGreen());
-            g.criarGrafico();
-            Grafico b = new Grafico(histograma.getBlue());
-            b.criarGrafico();
-            System.out.println(histograma.getRed().getMenorChaveValor().getChave());
-            System.out.println(histograma.getRed().getMaiorChaveValor().getChave());
             Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
             double fracao = 1.0 / 1;
             double[][] mascara = {
-                {0, -1, 0},
-                {-1, 5, -1},
-                {0, -1, 0}
+                {0, 0, 0, 0, 0},
+                {0, 0, -1, 0, 0},
+                {0, -1, 5, -1, 0},
+                {0, 0, -1, 0, 0},
+                {0, 0, 0, 0, 0}
             };
             Mascara masc = new Mascara(mascara, fracao);
             if (masc.verificarMascara()) {

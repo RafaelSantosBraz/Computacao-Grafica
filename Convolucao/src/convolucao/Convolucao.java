@@ -55,6 +55,7 @@ public class Convolucao {
         coords.forEach((t) -> {
             RGB pxy = imgSrc.getRGB(t);
             if (pxy != null) {
+                pxy = pxy.clonar();
                 double peso = t.getPeso();
                 pxy.setR((int) (pxy.getR() * peso));
                 pxy.setG((int) (pxy.getG() * peso));
@@ -80,8 +81,9 @@ public class Convolucao {
         vizinhos.forEach((t) -> {
             novo.incrementarRGB(t);
         });
-        //calcularMediaRGB(novo, somarPesos(coords));
-        novo.normalizarRGB();
+        //calcularMediaRGB(novo, coords.size());
+        calcularMediaRGB(novo, somarPesos(coords));
+         //novo.normalizarRGB();
         return novo;
     }
 
@@ -95,7 +97,9 @@ public class Convolucao {
     public void gerarImagemSaida(String caminho) throws IOException {
         BufferedImage saida = new BufferedImage(imgSrc.getLargura(), imgSrc.getAltura(), imgSrc.getTipo());
         imgOut.forEach((t, u) -> {
-            saida.setRGB(t.getX(), t.getY(), new Color(u.getR(), u.getG(), u.getB()).getRGB());
+            Color c = new Color(u.getR(), u.getG(), u.getB());
+            // System.out.println("Antes: " + imgSrc.getRGB(t) + " Depois: " + u);
+            saida.setRGB(t.getX(), t.getY(), c.getRGB());
         });
         File out = new File(caminho);
         ImageIO.write(saida, "JPG", out);

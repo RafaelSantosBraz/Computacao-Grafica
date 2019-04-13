@@ -5,6 +5,8 @@
  */
 package pkg4vizinhaca;
 
+import histograma.HistogramaRGB;
+
 /**
  *
  * @author aluno
@@ -63,10 +65,13 @@ public class RGB {
         B += rgb.getB();
     }
 
-    public void normalizarRGB() {
-        R = (R - 226) / 29;
-        G = (G - 226) / 29;
-        B = (B - 226) / 29;
+    public void normalizarRGB(HistogramaRGB histograma) {
+        Integer menorR = histograma.getRed().getMenorChaveValor().getChave(), maiorR = histograma.getRed().getMaiorChaveValor().getChave();
+        Integer menorG = histograma.getGreen().getMenorChaveValor().getChave(), maiorG = histograma.getGreen().getMaiorChaveValor().getChave();
+        Integer menorB = histograma.getBlue().getMenorChaveValor().getChave(), maiorB = histograma.getBlue().getMaiorChaveValor().getChave();
+        R = (R - menorR) / (maiorR - menorR);
+        G = (G - menorG) / (maiorG - menorG);
+        B = (B - menorB) / (maiorB - menorB);
         if (R > 255) {
             R = 255;
         } else if (R < 0) {
@@ -83,4 +88,32 @@ public class RGB {
             B = 226;
         }
     }
+
+    public void normalizarRGB() {
+        if (R > 255) {
+            R = 255;
+        } else if (R < 0) {
+            R = 0;
+        }
+        if (G > 255) {
+            G = 255;
+        } else if (G < 0) {
+            G = 0;
+        }
+        if (B > 255) {
+            B = 255;
+        } else if (B < 0) {
+            B = 0;
+        }
+    }
+
+    public RGB clonar() {
+        return new RGB(R, G, B);
+    }
+
+    @Override
+    public String toString() {
+        return "RGB{" + "R=" + R + ", G=" + G + ", B=" + B + '}';
+    }
+
 }
