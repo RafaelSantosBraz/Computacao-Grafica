@@ -5,8 +5,12 @@
  */
 package histograma;
 
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -14,7 +18,7 @@ import java.util.HashMap;
  */
 public class Histograma {
 
-    private final HashMap<Integer, Integer> histograma;
+    private HashMap<Integer, Integer> histograma;
     private String nome;
 
     public Histograma() {
@@ -61,10 +65,6 @@ public class Histograma {
         lista.forEach((t) -> {
             System.out.println("Valor " + t.getChave() + " Quant " + t.getValor());
         });
-    }
-
-    public void exibirGrafico() {
-
     }
 
     public String getNome() {
@@ -115,4 +115,56 @@ public class Histograma {
         return histograma;
     }
 
+    public void preencherHistogramaVermelho(String caminho) {
+        preencher(0, caminho);
+    }
+
+    public void preencherHistogramaVerde(String caminho) {
+        preencher(1, caminho);
+    }
+
+    public void preencherHistogramaAzul(String caminho) {
+        preencher(2, caminho);
+    }
+
+    private void preencher(int opRGB, String caminho) {
+        try {
+            histograma = new HashMap<>();
+            File f = new File(caminho);
+            BufferedImage img = ImageIO.read(f);
+            for (int x = 0; x < img.getWidth(); x++) {
+                for (int z = 0; z < img.getHeight(); z++) {
+                    Color c = new Color(img.getRGB(x, z));
+                    switch (opRGB) {
+                        case 0:
+                            setValor(c.getRed());
+                            break;
+                        case 1:
+                            setValor(c.getGreen());
+                            break;
+                        case 2:
+                            setValor(c.getBlue());
+                            break;
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erro: " + e.toString());
+        }
+    }
+
+    public void zerarHistograma() {
+        histograma = new HashMap<>();
+    }
+
+    public ChaveValor getMenorChaveValor() {
+        ArrayList<ChaveValor> valores = getValoresCrescentes();
+        return valores.get(0);
+    }
+
+    public ChaveValor getMaiorChaveValor() {
+        ArrayList<ChaveValor> valores = getValoresCrescentes();
+        return valores.get(valores.size() - 1);
+    }
 }

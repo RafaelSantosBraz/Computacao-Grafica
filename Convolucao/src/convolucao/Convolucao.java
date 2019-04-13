@@ -80,8 +80,8 @@ public class Convolucao {
         vizinhos.forEach((t) -> {
             novo.incrementarRGB(t);
         });
-        calcularMediaRGB(novo, somarPesos(coords));
-        //novo.normalizarRGB();
+        //calcularMediaRGB(novo, somarPesos(coords));
+        novo.normalizarRGB();
         return novo;
     }
 

@@ -21,34 +21,23 @@ public class Run {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        try {
-            Histograma histRed = new Histograma("Vermelho");
-            Histograma histGreen = new Histograma("Verde");
-            Histograma histBlue = new Histograma("Azul");
-            File f = new File("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Histograma/teste.jpg");
-            BufferedImage img = ImageIO.read(f);
-            for (int x = 0; x < img.getWidth(); x++) {
-                for (int z = 0; z < img.getHeight(); z++) {
-                    Color c = new Color(img.getRGB(x, z));
-                    int r = c.getRed();
-                    int g = c.getGreen();
-                    int b = c.getBlue();
-                    histRed.setValor(r);
-                    histGreen.setValor(g);
-                    histBlue.setValor(b);
-                }
-            }
-            //            histRed.exibirValores();
-            //            histGreen.exibirValores();
-            //            histBlue.exibirValores();
-            //            histRed.exibirValoresCrescente();
-            Grafico graph = new Grafico(histRed);
-            graph.criarGrafico();
-            Grafico graph2 = new Grafico(histGreen);
-            graph2.criarGrafico();
-            Grafico graph3 = new Grafico(histBlue);
-            graph3.criarGrafico();
-        } catch (Exception e) {
-        }
+//            Histograma histRed = new Histograma("Vermelho");
+//            Histograma histGreen = new Histograma("Verde");
+//            Histograma histBlue = new Histograma("Azul");           
+//            histRed.preencherHistogramaVermelho("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Histograma/teste.jpg");            
+//            Grafico graph = new Grafico(histRed);
+//            graph.criarGrafico();
+//            Grafico graph2 = new Grafico(histGreen);
+//            graph2.criarGrafico();
+//            Grafico graph3 = new Grafico(histBlue);
+//            graph3.criarGrafico();
+        HistogramaRGB histograma = new HistogramaRGB();
+        histograma.preencherHistograma("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Histograma/teste.jpg");
+        Grafico r = new Grafico(histograma.getRed());
+        r.criarGrafico();
+        Grafico g = new Grafico(histograma.getGreen());
+        g.criarGrafico();
+        Grafico b = new Grafico(histograma.getBlue());
+        b.criarGrafico();
     }
 }

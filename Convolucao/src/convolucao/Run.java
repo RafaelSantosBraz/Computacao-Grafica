@@ -5,6 +5,8 @@
  */
 package convolucao;
 
+import histograma.Grafico;
+import histograma.HistogramaRGB;
 import pkg4vizinhaca.Imagem;
 
 /**
@@ -19,18 +21,28 @@ public class Run {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            Imagem img = new Imagem("/home/aluno/Área de Trabalho/Computacao-Grafica/Convolucao/teste.jpg");
+            HistogramaRGB histograma = new HistogramaRGB();
+            histograma.preencherHistograma("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
+            Grafico r = new Grafico(histograma.getRed());
+            r.criarGrafico();
+            Grafico g = new Grafico(histograma.getGreen());
+            g.criarGrafico();
+            Grafico b = new Grafico(histograma.getBlue());
+            b.criarGrafico();
+            System.out.println(histograma.getRed().getMenorChaveValor().getChave());
+            System.out.println(histograma.getRed().getMaiorChaveValor().getChave());
+            Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
             double fracao = 1.0 / 1;
             double[][] mascara = {
-                {1,1,1},
-                {1,1,1},
-                {1,1,1}
+                {0, -1, 0},
+                {-1, 5, -1},
+                {0, -1, 0}
             };
             Mascara masc = new Mascara(mascara, fracao);
             if (masc.verificarMascara()) {
                 Convolucao conv = new Convolucao(img, masc);
                 conv.aplicarConvolucao();
-                conv.gerarImagemSaida("/home/aluno/Área de Trabalho/Computacao-Grafica/Convolucao/o ut3.jpg");
+                conv.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/out.jpg");
             } else {
                 System.out.println("Máscara Inválida!");
             }
