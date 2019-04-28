@@ -26,9 +26,9 @@ public class Mascara {
     }
 
     private void aplicarFracao(double fracao) {
-        for (int c = 0; c < masc.length; c++) {
-            for (int i = 0; i < masc[c].length; i++) {
-                masc[c][i] *= fracao;
+        for (double[] masc1 : masc) {
+            for (int i = 0; i < masc1.length; i++) {
+                masc1[i] *= fracao;
             }
         }
     }
@@ -78,5 +78,26 @@ public class Mascara {
 
     public double getPeso(Coordenada coord) {
         return masc[coord.getX()][coord.getY()];
+    }
+
+    public void aplicarMediana() {
+        ArrayList<Double> pesos = new ArrayList<>();
+        for (double[] linha : masc) {
+            for (double x : linha) {
+                pesos.add(x);
+            }
+        }
+        pesos.sort((o1, o2) -> {
+            if (o1 < o2) {
+                return -1;
+            }
+            if (o1 > o2) {
+                return 1;
+            }
+            return 0;
+        });
+        Coordenada meio = getCoordMeio();
+        masc[meio.getX()][meio.getY()] = pesos.get(pesos.size() / 2);
+        System.out.println("a");
     }
 }

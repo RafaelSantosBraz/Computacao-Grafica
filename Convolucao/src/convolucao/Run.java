@@ -5,8 +5,6 @@
  */
 package convolucao;
 
-import histograma.Grafico;
-import histograma.HistogramaRGB;
 import pkg4vizinhaca.Imagem;
 
 /**
@@ -32,6 +30,7 @@ public class Run {
             };
             Mascara masc = new Mascara(mascara, fracao);
             if (masc.verificarMascara()) {
+                masc.aplicarMediana();                
                 Convolucao conv = new Convolucao(img, masc);
                 conv.aplicarConvolucao();
                 conv.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/out.jpg");
