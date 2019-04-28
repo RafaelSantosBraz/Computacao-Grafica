@@ -6,8 +6,6 @@
 package escalacinza;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +17,10 @@ public class Run {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EscalaCinza cinza = new EscalaCinza("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/EscalaCinza/teste.jpg", "/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/EscalaCinza/out.jpg");
+        EscalaCinza cinza = new EscalaCinza(
+                "/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/EscalaCinza/teste.jpg",
+                "/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/EscalaCinza/out.jpg"
+        );
         try {
             cinza.converter();
         } catch (IOException ex) {

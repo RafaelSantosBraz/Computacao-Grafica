@@ -20,6 +20,7 @@ public class Histograma {
 
     private HashMap<Integer, Integer> histograma;
     private String nome;
+    private BufferedImage img;
 
     public Histograma() {
         histograma = new HashMap<>();
@@ -131,7 +132,7 @@ public class Histograma {
         try {
             histograma = new HashMap<>();
             File f = new File(caminho);
-            BufferedImage img = ImageIO.read(f);
+            img = ImageIO.read(f);
             for (int x = 0; x < img.getWidth(); x++) {
                 for (int z = 0; z < img.getHeight(); z++) {
                     Color c = new Color(img.getRGB(x, z));
@@ -167,4 +168,9 @@ public class Histograma {
         ArrayList<ChaveValor> valores = getValoresCrescentes();
         return valores.get(valores.size() - 1);
     }
+
+    public BufferedImage getImg() {
+        return img;
+    }
+
 }

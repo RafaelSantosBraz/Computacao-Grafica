@@ -12,9 +12,9 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author aluno
+ * @author rafael
  */
-public class Conversion {
+public class Run {
 
     /**
      * @param args the command line arguments
@@ -40,14 +40,14 @@ public class Conversion {
                     double y = 16 + (65.738 * r / 256) + (129.057 * g / 256) + (25.064 * b / 256);
                     double cb = 128 - (37.945 * r / 256) - (74.494 * g / 256) + (112.439 * b / 256);
                     double cr = 128 + (112.439 * r / 256) - (94.154 * b / 256) - (18.258 * b / 256);
-                    
+
                     double ny = (y - 16) / (218) * 255;
                     double ncb = (y - 16) / (224) * 255;
                     double ncr = (y - 16) / (224) * 255;
-                    
-                    redImage.setRGB(x, z, new Color((int)y, (int)y, (int)y).getRGB());
-                    greenImage.setRGB(x, z, new Color((int)cb, (int)cb, (int)cb).getRGB());
-                    blueImage.setRGB(x, z, new Color((int)cr, (int)cr, (int)cr).getRGB());
+
+                    redImage.setRGB(x, z, new Color((int) y, (int) y, (int) y).getRGB());
+                    greenImage.setRGB(x, z, new Color((int) cb, (int) cb, (int) cb).getRGB());
+                    blueImage.setRGB(x, z, new Color((int) cr, (int) cr, (int) cr).getRGB());
                     count++;
                 }
             }
@@ -61,5 +61,4 @@ public class Conversion {
         } catch (Exception e) {
         }
     }
-
 }
