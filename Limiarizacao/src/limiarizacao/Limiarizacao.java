@@ -33,4 +33,13 @@ public class Limiarizacao {
         //graph.criarGraficoLimiar(t);
     }
 
+    public void aplicarLimiarProbabilidade() throws IOException {
+        Histograma histRed = new Histograma("Vermelho");
+        histRed.preencherHistogramaVermelho(srcPath);
+        //Grafico graph = new Grafico(histRed);
+        LimiarProbabilidade limi = new LimiarProbabilidade(histRed);
+        int t = limi.calcularProbabilidade();
+        limi.gerarImagemSaida(outPath, histRed.getImg(), t);
+        //graph.criarGraficoLimiar(t);
+    }
 }

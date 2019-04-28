@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  */
 public class Otsu {
 
-    private final Histograma P;
+    protected final Histograma P;
 
     public Otsu(Histograma histograma) {
         P = histograma;
