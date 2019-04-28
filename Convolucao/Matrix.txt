@@ -1,0 +1,72 @@
+// Realce excelente
+
+ double fracao = 1.0 / 1;
+            double[][] mascara = {
+                {0, 0, 0, 0, 0},
+                {0, 0, -1, 0, 0},
+                {0, -1, 5, -1, 0},
+                {0, 0, -1, 0, 0},
+                {0, 0, 0, 0, 0}
+            };
+
+// filtros de média
+
+double fracao = 1.0 / 5;
+            double[][] mascara = {
+                {0, 1, 0},
+                {1, 1, 1},
+                {0, 1, 0}
+            };
+
+ double fracao = 1.0 / 9;
+            double[][] mascara = {
+                {1, 1, 1},
+                {1, 1, 1},
+                {1, 1, 1}
+            };
+
+double fracao = 1.0 / 10;
+            double[][] mascara = {
+                {1, 1, 1},
+                {1, 2, 1},
+                {1, 1, 1}
+            };
+
+double fracao = 1.0 / 12;
+            double[][] mascara = {
+                {1, 2, 1},
+                {2, 4, 2},
+                {1, 2, 1}
+            };
+
+// filtros Laplacianos
+
+double fracao = 1.0 / 1;
+            double[][] mascara = {
+                {0, 1, 0},
+                {1, -4, 1},
+                {0, 1, 0}
+            };
+
+ double fracao = 1.0 / 1;
+            double[][] mascara = {
+                {1, 1, 1},
+                {1, -8, 1},
+                {1, 1, 1}
+            };
+
+double fracao = 1.0 / 1;
+            double[][] mascara = {
+                {0, -1, 0},
+                {-1, 4, -1},
+                {0, -1, 0}
+            };
+
+double fracao = 1.0 / 1;
+            double[][] mascara = {
+                {-1, -1, -1},
+                {-1, 8, -1},
+                {-1, -1, -1}
+            };
+            
+                                                

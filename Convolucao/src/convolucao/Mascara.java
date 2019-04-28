@@ -57,20 +57,22 @@ public class Mascara {
         Coordenada meio = getCoordMeio();
         for (int n = 0; n < masc.length; n++) {
             for (int m = 0; m < masc.length; m++) {
-                int novoX, novoY, distX, distY;
-                distX = meio.getX() - n;
-                if (distX > 0) {
-                    novoX = xy.getX() - distX;
-                } else {
-                    novoX = xy.getX() + distX;
+                if (masc[n][m] != 0.0) {
+                    int novoX, novoY, distX, distY;
+                    distX = meio.getX() - n;
+                    if (distX > 0) {
+                        novoX = xy.getX() - distX;
+                    } else {
+                        novoX = xy.getX() + distX;
+                    }
+                    distY = meio.getY() - m;
+                    if (distY > 0) {
+                        novoY = xy.getY() - distY;
+                    } else {
+                        novoY = xy.getY() + distY;
+                    }
+                    coords.add(new CoordenadaPeso(novoX, novoY, masc[n][m]));
                 }
-                distY = meio.getY() - m;
-                if (distY > 0) {
-                    novoY = xy.getY() - distY;
-                } else {
-                    novoY = xy.getY() + distY;
-                }
-                coords.add(new CoordenadaPeso(novoX, novoY, masc[n][m]));
             }
         }
         return coords;

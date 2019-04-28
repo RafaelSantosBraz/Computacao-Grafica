@@ -5,6 +5,7 @@
  */
 package convolucao;
 
+import escalacinza.EscalaCinza;
 import pkg4vizinhaca.Imagem;
 
 /**
@@ -22,15 +23,23 @@ public class Run {
             Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
             double fracao = 1.0 / 1;
             double[][] mascara = {
-                {0, 0, 0, 0, 0},
-                {0, 0, -1, 0, 0},
-                {0, -1, 5, -1, 0},
-                {0, 0, -1, 0, 0},
-                {0, 0, 0, 0, 0}
+                {-1, -1, -1},
+                {-1, 8, -1},
+                {-1, -1, -1}
             };
             Mascara masc = new Mascara(mascara, fracao);
             if (masc.verificarMascara()) {
-                masc.aplicarMediana();                
+                // utilizar essa função para aplicar suavização por Mediana
+//                masc.aplicarMediana();     
+                
+                // algoritmo que transforma imagem em escala de cinza para filtros Laplacianos e outros
+//                EscalaCinza cinza = new EscalaCinza(
+//                        "/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg", 
+//                        "/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/testeCinza.jpg"
+//                );
+//                cinza.converter();
+//                img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/testeCinza.jpg");
+               
                 Convolucao conv = new Convolucao(img, masc);
                 conv.aplicarConvolucao();
                 conv.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/out.jpg");
