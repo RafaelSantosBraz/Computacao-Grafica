@@ -5,7 +5,6 @@
  */
 package convolucao;
 
-import escalacinza.EscalaCinza;
 import pkg4vizinhaca.Imagem;
 
 /**
@@ -20,7 +19,7 @@ public class Run {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/teste.jpg");
+            Imagem img = new Imagem("/home/cc47192962899/Área de Trabalho/Computacao-Grafica/Convolucao/teste.jpg");
             double fracao = 1.0 / 1;
             double[][] mascara = {
                 {-1, -1, -1},
@@ -41,8 +40,12 @@ public class Run {
 //                img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/testeCinza.jpg");
                
                 Convolucao conv = new Convolucao(img, masc);
-                conv.aplicarConvolucao();
-                conv.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/out.jpg");
+                // método aplica concolução sem normalizar com máximo e mínimo
+                //conv.aplicarConvolucao();     
+                // método aplica concolução com  normalizar com máximo e mínimo
+                conv.aplicarConvolucaoMaximoMinimo();
+                // último parâmetro 1 normaliza com valor máximo e mínimo
+                conv.gerarImagemSaida("/home/cc47192962899/Área de Trabalho/Computacao-Grafica/Convolucao/out.jpg", 1);
             } else {
                 System.out.println("Máscara Inválida!");
             }

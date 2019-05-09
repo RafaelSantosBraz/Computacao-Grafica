@@ -32,13 +32,21 @@ public class Convolucao {
     }
 
     public void aplicarConvolucao() {
+        convolucao(0);
+    }
+
+    public void aplicarConvolucaoMaximoMinimo() {
+        convolucao(1);
+    }
+
+    private void convolucao(int op) {
         imgOut = new HashMap<>();
         for (int x = 0; x < imgSrc.getLargura(); x++) {
             for (int y = 0; y < imgSrc.getAltura(); y++) {
                 Coordenada xy = new Coordenada(x, y);
                 ArrayList<CoordenadaPeso> coordPeso = mascara.getCoordenadasRelativas(xy);
                 ArrayList<RGB> vizinhos = getListaPixels(coordPeso);
-                RGB novo = calcularMediapixels(vizinhos, coordPeso);
+                RGB novo = calcularMediapixels(vizinhos, coordPeso, op);
                 imgOut.put(xy, novo);
             }
         }
@@ -76,14 +84,16 @@ public class Convolucao {
         return peso;
     }
 
-    private RGB calcularMediapixels(ArrayList<RGB> vizinhos, ArrayList<CoordenadaPeso> coords) {
+    private RGB calcularMediapixels(ArrayList<RGB> vizinhos, ArrayList<CoordenadaPeso> coords, int op) {
         RGB novo = new RGB(0, 0, 0);
         vizinhos.forEach((t) -> {
             novo.incrementarRGB(t);
         });
-        //calcularMediaRGB(novo, coords.size());
-        calcularMediaRGB(novo, somarPesos(coords));
-         //novo.normalizarRGB();
+        if (op == 0) {
+            //calcularMediaRGB(novo, coords.size());
+            calcularMediaRGB(novo, somarPesos(coords));
+            //novo.normalizarRGB();
+        }
         return novo;
     }
 
@@ -94,7 +104,10 @@ public class Convolucao {
         p.normalizarRGB();
     }
 
-    public void gerarImagemSaida(String caminho) throws IOException {
+    public void gerarImagemSaida(String caminho, int op) throws IOException {
+        if (op == 1) {
+            normalizar();
+        }
         BufferedImage saida = new BufferedImage(imgSrc.getLargura(), imgSrc.getAltura(), imgSrc.getTipo());
         imgOut.forEach((t, u) -> {
             Color c = new Color(u.getR(), u.getG(), u.getB());
@@ -103,5 +116,54 @@ public class Convolucao {
         });
         File out = new File(caminho);
         ImageIO.write(saida, "JPG", out);
+    }
+
+    private ArrayList<Integer> getValorMinimo() {
+        ArrayList<Integer> minimo = new ArrayList<>();
+        minimo.add(0);
+        minimo.add(0);
+        minimo.add(0);
+        imgOut.forEach((t, u) -> {
+            if (u.getR() < minimo.get(0)) {
+                minimo.set(0, u.getR());
+            }
+            if (u.getG() < minimo.get(1)) {
+                minimo.set(1, u.getG());
+            }
+            if (u.getB() < minimo.get(2)) {
+                minimo.set(2, u.getB());
+            }
+        });
+        return minimo;
+    }
+
+    private ArrayList<Integer> getValorMaximo() {
+        ArrayList<Integer> maximo = new ArrayList<>();
+        maximo.add(0);
+        maximo.add(0);
+        maximo.add(0);
+        imgOut.forEach((t, u) -> {
+            if (u.getR() > maximo.get(0)) {
+                maximo.set(0, u.getR());
+            }
+            if (u.getG() > maximo.get(1)) {
+                maximo.set(1, u.getG());
+            }
+            if (u.getB() > maximo.get(2)) {
+                maximo.set(2, u.getB());
+            }
+        });
+        return maximo;
+    }
+
+    private void normalizar() {
+        ArrayList<Integer> maximo = getValorMaximo();
+        ArrayList<Integer> minimo = getValorMinimo();
+        imgOut.forEach((t, u) -> {
+            int r = ((u.getR() - minimo.get(0)) * (255)) / (maximo.get(0) - minimo.get(0));
+            int g = ((u.getG() - minimo.get(1)) * (255)) / (maximo.get(1) - minimo.get(1));
+            int b = ((u.getB() - minimo.get(2)) * (255)) / (maximo.get(2) - minimo.get(2));
+            imgOut.put(t, new RGB(r, g, b));
+        });
     }
 }
