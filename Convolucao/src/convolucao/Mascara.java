@@ -81,25 +81,4 @@ public class Mascara {
     public double getPeso(Coordenada coord) {
         return masc[coord.getX()][coord.getY()];
     }
-
-    public void aplicarMediana() {
-        ArrayList<Double> pesos = new ArrayList<>();
-        for (double[] linha : masc) {
-            for (double x : linha) {
-                pesos.add(x);
-            }
-        }
-        pesos.sort((o1, o2) -> {
-            if (o1 < o2) {
-                return -1;
-            }
-            if (o1 > o2) {
-                return 1;
-            }
-            return 0;
-        });
-        Coordenada meio = getCoordMeio();
-        masc[meio.getX()][meio.getY()] = pesos.get(pesos.size() / 2);
-        System.out.println("a");
-    }
 }

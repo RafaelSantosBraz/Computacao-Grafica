@@ -27,9 +27,7 @@ public class Run {
                 {-1, -1, -1}
             };
             Mascara masc = new Mascara(mascara, fracao);
-            if (masc.verificarMascara()) {
-                // utilizar essa função para aplicar suavização por Mediana
-//                masc.aplicarMediana();     
+            if (masc.verificarMascara()) {            
                 
                 // algoritmo que transforma imagem em escala de cinza para filtros Laplacianos e outros
 //                EscalaCinza cinza = new EscalaCinza(
