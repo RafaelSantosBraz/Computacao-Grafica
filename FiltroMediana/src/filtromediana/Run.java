@@ -31,7 +31,7 @@ public class Run {
 //            cinza.converter();
 //            img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/testeCinza.jpg");
             // segundo parâmetro indica o tamanho da janela, que deve ser ímpar
-            Mediana filtroMediana = new Mediana(img, 5);
+            Mediana filtroMediana = new Mediana(img, 11);
             filtroMediana.mediana();
             filtroMediana.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\FiltroMediana\\out.jpg");
         } catch (Exception ex) {
