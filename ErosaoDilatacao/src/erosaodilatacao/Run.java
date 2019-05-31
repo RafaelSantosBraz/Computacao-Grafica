@@ -28,13 +28,15 @@ public class Run {
             Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/ErosaoDilatacao/testeCinza.jpg");
             int[][] elemEstr = {
                 {0, 1, 0},
-                {1, 1, 1},
+                {0, 1, 0},
                 {0, 1, 0}
             };
             ElementoEstruturante elemento = new ElementoEstruturante(elemEstr);
             OperacaoED operacao = new OperacaoED(img, elemento);
-            operacao.erosao(10);
+            operacao.erosao(20);
             //operacao.dilatacao(10);
+            //operacao.erosaoDepoisDilatacao(10);
+            //operacao.dilatacaoDepoisErosao(10);
             operacao.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/ErosaoDilatacao/out.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());

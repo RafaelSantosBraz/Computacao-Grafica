@@ -51,6 +51,16 @@ public class OperacaoED {
         operacaoBase(repeticoes, false);
     }
 
+    public void erosaoDepoisDilatacao(int repeticoes){
+        erosao(repeticoes);
+        dilatacao(repeticoes);
+    }
+    
+    public void dilatacaoDepoisErosao(int repeticoes){       
+        dilatacao(repeticoes);
+        erosao(repeticoes);
+    }
+    
     private void operacaoBase(int repeticoes, boolean erosao) {
         for (int c = 0; c < repeticoes; c++) {
             imgOut = new HashMap<>();
