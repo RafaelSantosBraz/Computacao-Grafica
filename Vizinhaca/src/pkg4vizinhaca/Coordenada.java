@@ -27,4 +27,8 @@ public class Coordenada {
         return y;
     }
 
+    public Coordenada clonar() {
+        return new Coordenada(x, y);
+    }
+
 }
