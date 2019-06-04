@@ -25,7 +25,7 @@ public class Run {
 //                );
 //                cinza.converter();
 //                img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/Convolucao/testeCinza.jpg");
-            Imagem img = new Imagem("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/ErosaoDilatacao/testeCinza.jpg");
+            Imagem img = new Imagem("D:\\GitHub\\Computacao-Grafica\\ErosaoDilatacao\\testeCinza.jpg");
             int[][] elemEstr = {
                 {0, 1, 0},
                 {0, 1, 0},
@@ -37,7 +37,7 @@ public class Run {
             //operacao.dilatacao(10);
             //operacao.erosaoDepoisDilatacao(10);
             //operacao.dilatacaoDepoisErosao(10);
-            operacao.gerarImagemSaida("/media/rafael/Dados Compartilhados/GitHub/Computacao-Grafica/ErosaoDilatacao/out.jpg");
+            operacao.gerarImagemSaida("D:\\GitHub\\Computacao-Grafica\\ErosaoDilatacao\\out.jpg");
         } catch (Exception e) {
             System.err.println("Erro: " + e.toString());
         }

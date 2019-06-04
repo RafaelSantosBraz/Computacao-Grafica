@@ -37,9 +37,9 @@ public class Imagem {
     
     public void rePreencherQuadro(HashMap<Coordenada, RGB> novo) {
         quadro = new HashMap<>();
-        novo.forEach((t, u) -> {            
-            adicionar(t.clonar(), u.clonar());
-        });
+        novo.forEach((t, u) -> {             
+            adicionar(t, u.clonar());
+        });        
     }
     
     private void adicionar(Coordenada coordenada, RGB rgb) {
