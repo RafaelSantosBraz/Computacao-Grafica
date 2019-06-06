@@ -17,14 +17,14 @@ import javax.imageio.ImageIO;
  * @author aluno
  */
 public class Imagem {
-    
+
     private HashMap<String, RGB> quadro;
     private final File f;
     private final BufferedImage img;
     private final int largura;
     private final int altura;
     private final int tipo;
-    
+
     public Imagem(String caminho) throws IOException {
         quadro = new HashMap<>();
         f = new File(caminho);
@@ -34,36 +34,36 @@ public class Imagem {
         tipo = img.getType();
         preencher();
     }
-    
+
     public void rePreencherQuadro(HashMap<Coordenada, RGB> novo) {
         quadro = new HashMap<>();
-        novo.forEach((t, u) -> {             
+        novo.forEach((t, u) -> {
             adicionar(t, u.clonar());
-        });        
+        });
     }
-    
+
     private void adicionar(Coordenada coordenada, RGB rgb) {
         String coord = coordenada.getX() + ";" + coordenada.getY();
         quadro.put(coord, rgb);
     }
-    
+
     public RGB getRGB(Coordenada coordenada) {
         String coord = coordenada.getX() + ";" + coordenada.getY();
         return quadro.get(coord);
     }
-    
+
     public int getLargura() {
         return largura;
     }
-    
+
     public int getAltura() {
         return altura;
     }
-    
+
     public int getTipo() {
         return tipo;
     }
-    
+
     private void preencher() {
         for (int x = 0; x < largura; x++) {
             for (int y = 0; y < altura; y++) {
@@ -73,4 +73,9 @@ public class Imagem {
             }
         }
     }
+
+    public HashMap<String, RGB> getQuadro() {
+        return quadro;
+    }
+
 }

@@ -51,12 +51,12 @@ public class OperacaoED {
         operacaoBase(repeticoes, false);
     }
 
-    public void erosaoDepoisDilatacao(int repeticoes){
+    public void abertura(int repeticoes){
         erosao(repeticoes);
         dilatacao(repeticoes);
     }
     
-    public void dilatacaoDepoisErosao(int repeticoes){       
+    public void fechamento(int repeticoes){       
         dilatacao(repeticoes);
         erosao(repeticoes);
     }

@@ -116,4 +116,7 @@ public class RGB {
         return "RGB{" + "R=" + R + ", G=" + G + ", B=" + B + '}';
     }
 
+    public RGB inverter() {
+        return new RGB(255 - R, 255 - G, 255 - B);
+    }
 }

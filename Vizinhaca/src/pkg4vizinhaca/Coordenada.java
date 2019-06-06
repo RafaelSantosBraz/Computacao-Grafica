@@ -31,4 +31,9 @@ public class Coordenada {
         return new Coordenada(x, y);
     }
 
+    public static Coordenada getFromString(String coordenada) {
+        String[] valores = coordenada.split(";");
+        return new Coordenada(Integer.parseInt(valores[0]), Integer.parseInt(valores[1]));
+    }
+
 }
