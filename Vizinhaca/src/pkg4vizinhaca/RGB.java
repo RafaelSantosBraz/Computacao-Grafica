@@ -119,4 +119,10 @@ public class RGB {
     public RGB inverter() {
         return new RGB(255 - R, 255 - G, 255 - B);
     }
+
+    public static RGB subtrair(RGB rgb1, RGB rgb2) {
+        RGB novo = new RGB(rgb1.getR() - rgb2.getR(), rgb1.getG() - rgb2.getG(), rgb1.getB() - rgb2.getB());
+        novo.normalizarRGB();
+        return novo;
+    }
 }

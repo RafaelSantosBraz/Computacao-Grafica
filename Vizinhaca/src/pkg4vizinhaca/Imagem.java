@@ -35,6 +35,15 @@ public class Imagem {
         preencher();
     }
 
+    private Imagem(HashMap<String, RGB> quadro, File f, BufferedImage img, int largura, int altura, int tipo) {
+        this.quadro = quadro;
+        this.f = f;
+        this.img = img;
+        this.largura = largura;
+        this.altura = altura;
+        this.tipo = tipo;
+    }
+
     public void rePreencherQuadro(HashMap<Coordenada, RGB> novo) {
         quadro = new HashMap<>();
         novo.forEach((t, u) -> {
@@ -78,4 +87,11 @@ public class Imagem {
         return quadro;
     }
 
+    public Imagem copiarComOutroQuadro(HashMap<String, RGB> novoQuadro) {
+        return new Imagem(novoQuadro, f, img, largura, altura, tipo);
+    }
+    
+    public Imagem copiar(){
+        return new Imagem(quadro, f, img, largura, altura, tipo);
+    }
 }

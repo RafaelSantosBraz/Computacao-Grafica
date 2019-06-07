@@ -26,7 +26,7 @@ public class OperacaoED {
     private HashMap<Coordenada, RGB> imgOut;
     private final ElementoEstruturante elemEstr;
 
-    public OperacaoED(Imagem imgSrc, ElementoEstruturante elemEstr) throws Exception {
+    public OperacaoED(Imagem imgSrc, ElementoEstruturante elemEstr) {
         this.imgSrc = imgSrc;
         this.elemEstr = elemEstr;
     }
@@ -51,16 +51,16 @@ public class OperacaoED {
         operacaoBase(repeticoes, false);
     }
 
-    public void abertura(int repeticoes){
+    public void abertura(int repeticoes) {
         erosao(repeticoes);
         dilatacao(repeticoes);
     }
-    
-    public void fechamento(int repeticoes){       
+
+    public void fechamento(int repeticoes) {
         dilatacao(repeticoes);
         erosao(repeticoes);
     }
-    
+
     private void operacaoBase(int repeticoes, boolean erosao) {
         for (int c = 0; c < repeticoes; c++) {
             imgOut = new HashMap<>();
