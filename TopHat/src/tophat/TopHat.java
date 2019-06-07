@@ -34,9 +34,9 @@ public class TopHat {
     }
 
     public void abertura(int repeticoes) {
-        OperacaoED operacao = new OperacaoED(imgSrc, elemEstr);
+        OperacaoED operacao = new OperacaoED(imgSrc.copiarComQuadroClonado(), elemEstr);
         operacao.abertura(repeticoes);
-        HashMap<Coordenada, RGB> resultado = subtracao(imgSrc.getQuadro(), operacao.getImgOut());
+        HashMap<Coordenada, RGB> resultado = subtracaoAbertura(imgSrc.getQuadro(), operacao.getImgOut());
         Imagem imgResultado = imgSrc.copiar();
         imgResultado.rePreencherQuadro(resultado);
         Inversor inv = new Inversor(imgResultado);
@@ -44,7 +44,19 @@ public class TopHat {
         imgOut = inv.getImgOut();
     }
 
-    private HashMap<Coordenada, RGB> subtracao(HashMap<String, RGB> original, HashMap<Coordenada, RGB> segunda) {
+    public void fechamento(int repeticoes) {
+        OperacaoED operacao = new OperacaoED(imgSrc.copiarComQuadroClonado(), elemEstr);
+        operacao.fechamento(repeticoes);
+        HashMap<Coordenada, RGB> resultado = subtracaoFechamento(operacao.getImgOut(), imgSrc.getQuadro());
+        Imagem imgResultado = imgSrc.copiar();
+        imgResultado.rePreencherQuadro(resultado);
+        Inversor inv = new Inversor(imgResultado);
+        inv.inverter();
+        imgOut = inv.getImgOut();
+    }
+
+    
+    private HashMap<Coordenada, RGB> subtracaoAbertura(HashMap<String, RGB> original, HashMap<Coordenada, RGB> segunda) {
         HashMap<String, RGB> novoQuadro = new HashMap<>();
         segunda.forEach((t, u) -> {
             novoQuadro.put(t.getX() + ";" + t.getY(), u);
@@ -52,6 +64,18 @@ public class TopHat {
         HashMap<Coordenada, RGB> resultado = new HashMap<>();
         original.forEach((t, u) -> {            
             resultado.put(Coordenada.getFromString(t), RGB.subtrair(u, novoQuadro.get(t)));
+        });
+        return resultado;
+    }
+    
+    private HashMap<Coordenada, RGB> subtracaoFechamento(HashMap<Coordenada, RGB> segunda, HashMap<String, RGB> original) {
+        HashMap<String, RGB> novoQuadro = new HashMap<>();
+        segunda.forEach((t, u) -> {
+            novoQuadro.put(t.getX() + ";" + t.getY(), u);
+        });
+        HashMap<Coordenada, RGB> resultado = new HashMap<>();
+        original.forEach((t, u) -> {            
+            resultado.put(Coordenada.getFromString(t), RGB.subtrair(novoQuadro.get(t), u));
         });
         return resultado;
     }

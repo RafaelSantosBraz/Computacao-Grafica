@@ -91,6 +91,18 @@ public class Imagem {
         return new Imagem(novoQuadro, f, img, largura, altura, tipo);
     }
     
+    public Imagem copiarComQuadroClonado(){
+        return new Imagem(clonarQuadro(), f, img, largura, altura, tipo);
+    }
+    
+    public HashMap<String, RGB> clonarQuadro(){
+        HashMap<String, RGB> novo = new HashMap<>();
+        quadro.forEach((t, u) -> {
+            novo.put(t, u.clonar());
+        });
+        return novo;
+    }
+    
     public Imagem copiar(){
         return new Imagem(quadro, f, img, largura, altura, tipo);
     }
